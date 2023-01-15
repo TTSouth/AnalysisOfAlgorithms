@@ -1,0 +1,81 @@
+#include<iostream>
+#include<fstream>
+#include <string>
+
+#define M 4 //maximum number of students
+
+using namespace std;
+
+int main(){
+  string *studentID; // array of pointers to c-strings
+  string *studentResult; // array of pointers to c-strings
+  string temp; //temporary variable
+  string Result; //string to hold correct result
+
+  int index;
+
+  double score=0.0;
+  double scale=0.0;
+  char grade;
+  int N=0; //maximum number of questions
+
+cout<<"Enter number of exam questions: ";
+cin>>N;
+
+ifstream fin;
+fin.open("Ch12_Ex2Data.txt");
+if(fin.is_open()){
+int i=0;
+getline(fin,Result); //store first line of file in Result
+studentID=new string[M+1]; //allocate memory to studentID
+studentResult=new string[M+1]; //allocate memory to studentResult
+
+for(i=0;i<M;i++){
+getline(fin,temp);
+index=temp.find(' ');
+studentID[i]=temp.substr(0,index);
+studentResult[i]=temp.substr(index+1);
+}
+fin.close(); //close file
+cout<<endl<<"Processing Data";
+cout<<endl<<"Key : "<<Result<<endl;
+
+//calculate scores fo students
+for(i=0;i<M;i++){
+score=0.0; //initialize score to 0
+cout<<endl<<studentID[i];
+cout<<"\t"<<studentResult[i];
+for(int j=0;j<N;j++){
+if(studentResult[i][j]=='\n'){
+studentResult[i][j]='\0';
+break;
+}
+
+if(Result[j]==studentResult[i][j]) //if correct result
+score=score+2; //add 2 to score
+else if(studentResult[i][j]!=' '|| studentResult[i][j]!='\n') //if result is blank
+score=score+0; //add zero to score
+
+}
+
+
+cout<<"\t"<<score;
+scale= (double)score/40*100; //calculate scale
+//calculate grades
+if(scale>=90 && scale<=100) grade='A'; //90%-100%, A;
+else if(scale>=80 && scale<90) grade='B'; //80%-89.99%, B;
+else if(scale>=70 && scale<80) grade='C'; //70%-79.99%, C;
+else if(scale>=60 && scale<70) grade='D'; //60%-69.99%, D;
+else if(scale>=0 && scale<60) grade='F'; //0-59.99%, F.
+
+cout<<"\t"<<grade;
+}
+cout<<endl;
+}else{
+cout<<"Unable to find the file 'input.txt' in the current path of program\n";
+}
+
+
+return 0;
+}
+
