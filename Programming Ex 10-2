@@ -1,0 +1,166 @@
+/MAIN
+
+#include <iostream>
+#include "productType.h"
+
+using namespace std;
+
+int main() {
+    // Write your main here
+    
+    productType product("Crush","HEKDO",
+    "Dr.Pepper", 1000, 14.95, 10.0);
+    product.print();
+
+    product.setQuantitiesInStock(0);
+    product.print();
+
+    product.updateQuantitiesInStock(10);
+    product.print();
+
+    product.setDiscount(1.0);
+    product.print();
+
+    return 0;
+}
+
+
+// CPP
+
+#include"productType.h"
+#include <iostream>
+
+using namespace std;
+
+productType::productType() 
+{
+  productName = "";
+  id = "";
+  manufacturer = "";
+  quantitiesInStock = 0;
+  price = 0; 
+  discount = 0;
+}
+
+productType::productType(int qty, double pr, double disc) 
+{
+  productName = "";
+  id = "";
+  manufacturer = "";
+  quantitiesInStock = qty;
+  price = pr; 
+  discount = disc;
+}
+
+productType::productType(string mfr, int qty, double pr, double disc) 
+{
+  productName = "";
+  id = "";
+  manufacturer = mfr;
+  quantitiesInStock = qty;
+  price = pr; 
+  discount = disc;
+}
+
+productType::productType(string pName, string identity, string mfr, int qty, double pr, double disc) 
+{
+  productName = pName;
+  id = identity;
+  manufacturer = mfr;
+  quantitiesInStock = qty;
+  price = pr; 
+  discount = disc;
+}
+
+void productType::set(string pName, string identity, string mfr, int qty, double pr, double disc) 
+{
+  productName = pName;
+  id = identity;
+  manufacturer = mfr;
+  quantitiesInStock = qty;
+  price = pr; 
+  discount = disc;
+}
+
+void productType::print() const
+{
+  cout << "Produce Name: " << productName << endl;
+  cout << "Produce Id: " << id << endl;
+  cout << "Produce Manufacturer: " << manufacturer << endl;
+  cout << "Quantity in stock: " << quantitiesInStock << endl;
+  cout << "Price: " << price << endl;
+  cout << "Disount: " << discount << endl;
+}
+
+void productType::setQuantitiesInStock(int x) 
+{
+  quantitiesInStock = x;
+}
+
+void productType::updateQuantitiesInStock(int x)
+{
+  quantitiesInStock += x;
+}
+
+int productType::getQuantitiesInStock() const
+{
+  return quantitiesInStock;
+}
+
+void productType::setPrice(double x)
+{
+  price = x;
+}
+
+double productType::getPrice() const
+{
+  return price;
+}
+
+void productType::setDiscount(double disc)
+{
+  discount = disc;
+}
+
+double productType::getDiscount() const
+{
+  return discount;
+}
+
+
+//Header
+
+#include <string> 
+
+using namespace std;
+
+class productType                               
+{                                               
+public:                                         
+    productType();                              
+    productType(int, double, double);           
+    productType(string, int, double, double);   
+    productType(string, string, string, 
+                int, double, double);           
+
+    void set(string, string, string, int, 
+             double, double);                  
+    void print() const;                         
+
+    void setQuantitiesInStock(int x);           
+    void updateQuantitiesInStock(int x);       
+    int getQuantitiesInStock() const;           
+
+    void setPrice(double x);                    
+    double getPrice() const;                    
+    void setDiscount(double d);                 
+    double getDiscount() const;                 
+     
+private:                                        
+    string productName;                         
+    string id;                                  
+    string manufacturer;                        
+    int quantitiesInStock;                      
+    double price;                               
+    double discount;                            
+};                                              
