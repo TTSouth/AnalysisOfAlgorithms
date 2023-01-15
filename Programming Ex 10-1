@@ -1,0 +1,207 @@
+//Main program
+ 
+#include <iostream>
+#include <string>
+#include "studentType.h"
+
+using namespace std;
+
+int main()
+{
+    studentType student;
+    studentType student1;
+    student1.setFirstName("Kane");
+    student1.setLastName("Boss");
+    student1.setTestScore(60);
+    student1.setProgrammingScore(60);
+    student1.setGPA(2.7);
+    student1.setGrade();
+
+    studentType newStudent("Brain", "Johnson", '*', 85, 95, 3.89);
+
+
+     student1.print();
+    cout << "***************" << endl << endl;
+
+    newStudent.print();
+    cout << "***************" << endl << endl;
+
+    return 0;
+}
+
+
+//CPP
+
+#include <iostream>
+#include "studentType.h"
+
+using namespace std;
+
+studentType::studentType(string fName, string lName, char cGrade, int tScore, int pScore, double gpa)
+{
+  firstName = fName;
+  lastName = lName;
+  testScore = tScore;
+  programmingScore = pScore;
+  courseGrade = grade;
+  GPA = gpa;
+  setGrade();
+}
+
+string studentType::getFirstName() const
+{
+  return firstName;
+}
+
+string studentType::getLastName() const
+{
+  return lastName;
+}
+
+
+int studentType::getTestScore() const        
+{
+  return testScore;
+}
+
+int studentType::getProgrammingScore() const  
+{
+return programmingScore;
+}
+
+int studentType::getGrade()
+{
+  return grade;
+} 
+
+char studentType::getCourseGrade() const      
+{
+  return courseGrade;
+}
+
+
+
+double studentType::getGPA() const       
+{
+return GPA;
+}
+
+void studentType::setFirstName(string fName)
+{
+  firstName = fName;
+}
+
+void studentType::setLastName(string lName)
+{
+  lastName = lName;
+}
+
+void studentType::setTestScore(int tScore)
+{
+  testScore = tScore;
+}
+
+void studentType::setProgrammingScore(int pScore)
+{
+  programmingScore = pScore;
+}
+
+void studentType::setGrade()
+{
+  int average = (testScore + programmingScore) / 2;
+  
+  
+  if(average >= 90){
+    courseGrade = 'A';
+  }
+  else if(average >= 80){
+    courseGrade = 'B';
+  }
+  else if(average >= 70){
+    courseGrade = 'C';
+  }
+  else if(average >= 60){
+    courseGrade = 'D';
+  }
+  else{
+    courseGrade = 'F';
+  }
+    
+}
+
+void studentType::setCourseGrade(char grade)
+{
+  courseGrade = grade;
+}
+
+
+
+void studentType::setGPA(double gpa)
+{
+  GPA = gpa;
+}
+
+void studentType::print()
+{
+ 
+  cout << "Name: " << firstName << " " << lastName << endl;
+  cout << "Grade: " << courseGrade << endl;
+  cout << "Test Score: " << testScore << endl;
+  cout << "Programming Score: " << programmingScore << endl;
+  cout << "GPA: " << GPA << endl;
+}
+
+
+//Header File
+
+#ifndef STUDENTTYPE_H
+#define STUDENTTYPE_H
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+class studentType
+{
+    private:
+        string firstName;
+        string lastName;
+        char courseGrade;
+        int testScore;
+        int programmingScore;
+        double GPA;
+        int grade;
+        int average;
+        
+    public:
+        studentType() {};
+
+       studentType(string fName = "", string lName = "", char grade = '*', int tscore = 0, int pscore = 0, double gpa = 0); 
+
+        
+
+        //Mutator functions
+        void setFirstName(string fName);
+        void setLastName(string lName);
+        void setCourseGrade(char grade);
+        void setTestScore(int tScore);
+        void setProgrammingScore(int pScore);
+        void setGrade();
+        void setGPA(double gpa);
+        
+
+        //Accessor functions
+        string getFirstName() const; 
+        string getLastName() const;
+        char getCourseGrade() const;
+        int getTestScore() const;
+        int getProgrammingScore() const;
+        int getGrade();
+        double getGPA() const;
+        
+        void print();
+        
+        
+};
+
+#endif
